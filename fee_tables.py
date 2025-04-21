@@ -658,7 +658,6 @@ fee_rates_tnds = pd.DataFrame([
 import pandas as pd
 
 # Bước 1: Xác thực
-auth.authenticate_user()
 creds, _ = default()
 
 # Bước 2: Mở Google Sheet
