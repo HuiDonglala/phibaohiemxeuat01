@@ -656,13 +656,11 @@ fee_rates_tnds = pd.DataFrame([
 ])
 
 import pandas as pd
-import gspread
 from google.auth import default
 
 # Bước 1: Xác thực
 auth.authenticate_user()
 creds, _ = default()
-gc = gspread.authorize(creds)
 
 # Bước 2: Mở Google Sheet
 spreadsheet_url = "https://docs.google.com/spreadsheets/d/1lZTsaGto0WFVHHG7LCWYvFGoF_dUerBGEjYDbyWMXtQ/edit?gid=2063425688#gid=2063425688"
