@@ -656,7 +656,6 @@ fee_rates_tnds = pd.DataFrame([
 ])
 
 import pandas as pd
-from google.auth import default
 
 # Bước 1: Xác thực
 auth.authenticate_user()
