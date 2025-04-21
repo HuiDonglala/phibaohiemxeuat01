@@ -236,12 +236,9 @@ pivot_vni_master = pivot_vni_master.reindex(
 pd.set_option("display.max_columns", None)
 pd.set_option("display.width", 0)
 
-# display(pivot_vni_master)
 
 fee_rates_vni.to_csv("fee_rates_vni.csv", encoding='utf-8-sig')
 
-from google.colab import files
-# files.download("fee_rates_vni.csv")
 
 import pandas as pd
 
@@ -451,12 +448,9 @@ pivot_bmi_master = pivot_bmi_master.reindex(
 pd.set_option("display.max_columns", None)
 pd.set_option("display.width", 0)
 
-# display(pivot_bmi_master)
 
 fee_rates_bmi.to_csv("fee_rates_bmi.csv", encoding='utf-8-sig')
 
-from google.colab import files
-files.download("fee_rates_bmi.csv")
 
 import pandas as pd
 
@@ -593,12 +587,9 @@ pivot_pvi_master = pivot_pvi_master.reindex(
 pd.set_option("display.max_columns", None)
 pd.set_option("display.width", 0)
 
-# display(pivot_pvi_master)
 
 fee_rates_pvi.to_csv("fee_rates_pvi.csv", encoding='utf-8-sig')
 
-from google.colab import files
-# files.download("fee_rates_pvi.csv")
 
 import pandas as pd
 
@@ -666,7 +657,6 @@ fee_rates_tnds = pd.DataFrame([
 
 import pandas as pd
 import gspread
-from google.colab import auth
 from google.auth import default
 
 # Bước 1: Xác thực
@@ -1114,8 +1104,6 @@ while True:
 # !sudo dpkg --configure -a
 
 
-from google.colab import files
-uploaded = files.upload()
 
 from docx import Document
 import re
