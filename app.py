@@ -1,38 +1,33 @@
-# app.py
 
 import streamlit as st
-from fee_tables import fee_rates_bmi, fee_rates_pvi, fee_rates_vni
+from fee_tables import calculate_vehicle_fee, format_currency
 
-st.set_page_config(page_title="Tính phí bảo hiểm xe", layout="centered")
+st.set_page_config(page_title="Báo phí bảo hiểm xe", layout="centered")
+st.title("🚗 Công cụ báo phí bảo hiểm xe")
 
-st.title("🚗 Tính phí bảo hiểm xe")
+st.markdown("Nhập thông tin xe để tính phí bảo hiểm:")
 
-company = st.selectbox("Chọn công ty bảo hiểm", ["BMI", "PVI", "VNI"])
+# Nhập thông tin cần thiết
+company = st.selectbox("Chọn công ty bảo hiểm", ["VNI", "BMI", "PVI", "TNDS"])
+vehicle_type = st.text_input("Loại xe (VD: Xe chở người, Xe tải...)")
+purpose = st.text_input("Mục đích sử dụng (VD: Không KDVT, KDVT)")
 value = st.number_input("Giá trị xe (VND)", min_value=100_000_000, step=10_000_000)
-year = st.text_input("Năm sản xuất (VD: 2022)")
-part_theft = st.checkbox("Thêm quyền lợi mất cắp bộ phận (chỉ áp dụng cho PVI)")
+months = st.number_input("Thời hạn bảo hiểm (tháng)", min_value=1, max_value=36, value=12)
+product_code = st.text_input("Mã sản phẩm (nếu có, cách nhau bởi dấu phẩy)")
 
 if st.button("Tính phí"):
     try:
-        year_key = str(year).strip()
-
-        if company == "BMI":
-            rate = fee_rates_bmi.get(year_key)
-        elif company == "PVI":
-            rate = fee_rates_pvi.get(year_key)
-        elif company == "VNI":
-            rate = fee_rates_vni.get(year_key)
+        result = calculate_vehicle_fee(
+            company=company,
+            vehicle_type=vehicle_type,
+            purpose=purpose,
+            value=value,
+            months=months,
+            product_codes=[p.strip() for p in product_code.split(",")] if product_code else []
+        )
+        if result is not None:
+            st.success(f"✅ Phí bảo hiểm: {format_currency(result)} VND")
         else:
-            rate = None
-
-        if not rate:
-            st.error("Không tìm thấy tỷ lệ cho năm sản xuất này.")
-        else:
-            total_fee = value * rate
-            if company == "PVI" and part_theft:
-                total_fee *= 1.2  # nhân thêm 20%
-
-            st.success(f"✅ Phí bảo hiểm ước tính: {total_fee:,.0f} VND")
-
+            st.warning("Không tìm thấy mức phí phù hợp với thông tin đã nhập.")
     except Exception as e:
-        st.error(f"Lỗi: {e}")
+        st.error(f"Lỗi khi tính phí: {e}")
