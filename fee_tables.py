@@ -236,7 +236,6 @@ pivot_vni_master = pivot_vni_master.reindex(
 pd.set_option("display.max_columns", None)
 pd.set_option("display.width", 0)
 
-from IPython.display import display
 # display(pivot_vni_master)
 
 fee_rates_vni.to_csv("fee_rates_vni.csv", encoding='utf-8-sig')
@@ -452,7 +451,6 @@ pivot_bmi_master = pivot_bmi_master.reindex(
 pd.set_option("display.max_columns", None)
 pd.set_option("display.width", 0)
 
-from IPython.display import display
 # display(pivot_bmi_master)
 
 fee_rates_bmi.to_csv("fee_rates_bmi.csv", encoding='utf-8-sig')
@@ -595,7 +593,6 @@ pivot_pvi_master = pivot_pvi_master.reindex(
 pd.set_option("display.max_columns", None)
 pd.set_option("display.width", 0)
 
-from IPython.display import display
 # display(pivot_pvi_master)
 
 fee_rates_pvi.to_csv("fee_rates_pvi.csv", encoding='utf-8-sig')
@@ -1048,7 +1045,6 @@ fee_table = calculate_vehicle_fee(
 )
 
 print(f"\n🔹 Kết quả tính phí cho dòng {dong_can_tinh_phi} trong sheet:\n")
-display(fee_table)  # Ensure display is called as a function
 
 print(
     vehicle_value,
